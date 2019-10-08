@@ -21,9 +21,9 @@ const server = http.createServer((req, res) => {
 				body = Buffer.concat(body).toString();
 				const decoded = decodeURIComponent(body);
 				console.info('[' + now + '] 投稿: ' + decoded);
+				const answerArr = decoded.replace(/^name=/, '').split('&yaki-shabu=');
 				res.write('<!DOCTYPE html><html lang="ja"><body><h1>' +
-					  decoded + 'が投稿されました</h1></body></html>');
-				res.end();
+					' 投稿者: ' + answerArr[0] + '<BR> 食べたいもの: ' + answerArr[1] + '<BR>が投稿されました</h1></body></html>'); res.end();
 			});
 			break;
 		default:
